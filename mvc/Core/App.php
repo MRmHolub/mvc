@@ -16,7 +16,7 @@ class App {
       session_start();
 
       $this->autorized = $_SESSION['email'] ?? null;
-      $_SESSION['autorized'] = $_SESSION['email'] ?? null;
+      $_SESSION['email'] = $_SESSION['email'] ?? null;
       $this->admin = $_SESSION['admin'] ?? null;
       $_SESSION['admin'] = $_SESSION['admin'] ?? null;
       $this->db = new Database_connection();      
@@ -31,7 +31,7 @@ class App {
             if (file_exists("Controllers/$controller.php")){
               include "Controllers/$controller.php";  
             } else { 
-              header("Location: $domena/");
+              header("Location: $this->domena/");
             }
           } else {
             include "Controllers/dashboard.php";
@@ -49,7 +49,7 @@ class App {
 
 
     public function get_autorized(){        
-        return $_SESSION['autorized'];
+        return $_SESSION['email'];
     }
 
     public function get_permission(){

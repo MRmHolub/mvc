@@ -15,12 +15,12 @@
                 
                 $result = $db->secure_query("SELECT admin FROM users WHERE email='?' AND password = '?';", [$logged_email, $user_password]); 
                 
-                set_autorization($_POST["email"]);
-                set_permission($result->fetch_assoc()['admin']);                			
+                $_SESSION['email'] = $_POST["email"] ?? null;
+                $_SESSION['admin'] = $result->fetch_assoc()['admin'];                			
             }
         }
         $mysqli->close();
-        header("Location: $domena/");
+        header("Location: $this->domena/");
     } else {
         include "Views/login.php";
     }

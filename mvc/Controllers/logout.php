@@ -1,5 +1,5 @@
 <?php 	
-	$mysqli = $db->open();
+	$mysqli = $this->db->open();
 	$time = date("y-m-d h:i:s");	
 	$email = $this->get_autorized();	
 	$mysqli->query("UPDATE users SET last_login='$time' WHERE email='$email';");
@@ -8,5 +8,5 @@
 	unset($_SESSION['email']);
 	unset($_SESSION["admin"]);
 
-	header("Location: $GLOBALS[domena]/");
+	header("Location: $this->domena/");
 ?>

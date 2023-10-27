@@ -26,9 +26,10 @@ if ($this->router->method == '') {
   
   unset($_SESSION['clicked_user']);
 
-  header("Location: $domena/users");
+  header("Location: $this->domena/users");
 
 } else if ($this->router->method == 'edit') {    
+  
   $mysqli = $this->db->open();	
   $clicked_email = $mysqli->real_escape_string($_POST['clicked_user']) ?? null;
   $_SESSION['clicked_user'] = $clicked_email;
@@ -52,7 +53,7 @@ if ($this->router->method == '') {
     $delete_email = $mysqli->real_escape_string($_POST['email']) ?? null;		
     if ($delete_email) $this->db->secure_query("DELETE FROM users WHERE email='?';", [$logged_email]);
     $mysqli->close();
-    header("Location: $domena/users");
+    header("Location: $this->domena/users");
 
 } else if ($this->router->method == 'add'){
     $mysqli = $this->db->open();	
@@ -67,7 +68,7 @@ if ($this->router->method == '') {
     if (mysqli_num_rows($query) == 0){
         $query_result = $mysqli->query("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('$name', '$last', '$password', '$email', '$phone', '$workplace', '$is_admin');"); 
     }
-    header("Location: $domena/users");
+    header("Location: $this->domena/users");
 } else {
   include "Views/does_not_exist.php";
 }
