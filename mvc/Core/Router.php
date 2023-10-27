@@ -24,14 +24,14 @@ class Router {
         $URL_arr = explode('/', $url ?? '');
 
         $this->controller = $URL_arr[0] ?? null;
-        $this->method = $URL__arr[1] ?? null;
+        $this->method = $URL_arr[1] ?? null;
         $this->num_of_params = count($URL_arr);
     
         $this->params = [];
         for ($i = 2; $i < $this->num_of_params; $i++) {
             $this->params[] = $URL_arr[$i] ?? null;
         }
-        
+
         //return ['controller' => $controller, 'method' => $method, 'params' => $params];
     }  
 }

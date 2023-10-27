@@ -3,12 +3,14 @@
 
   
 try {
-  $app = new App();
 
-  $autorized = $app->get_autorized();
+  $app = new App();
 
   $app->process_request();
   $app->call_controller();
+
+  echo $app->get_autorized();
+
 
 
 

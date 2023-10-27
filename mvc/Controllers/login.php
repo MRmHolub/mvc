@@ -3,20 +3,31 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $mysqli = $this->db->open();	
 
-        $logged_email = $mysqli->real_escape_string($_POST['email']) ?? null;		
-        $inserted_password = $mysqli->real_escape_string($_POST['password']) ?? null;
+        $logged_email = $_POST['email'] ?? null;		
+        $inserted_password = $_POST['password'] ?? null;
         
         if ($logged_email && $inserted_password){	
-            $query_result = $db->secure_query("SELECT password FROM users WHERE email = ' ? ';", [$logged_email]);
+            $mysqli = $mysqli->prepare("SELECT password FROM users WHERE email = ?;");
+            $mysqli->bind_param("s", $logged_email);
+            $mysqli->execute();
+            $query_result = $mysqli->get_result();
+            $mysqli->close();
             
             $user_password = $query_result->fetch_assoc()['password'];				            						
             
-            if ($user_password == $inserted_password){                
+            if ($user_password == $inserted_password){   
+                $mysqli = $this->db->open();	             
+                $mysqli = $mysqli->prepare("SELECT admin FROM users WHERE email=? AND password = ?;");
                 
-                $result = $db->secure_query("SELECT admin FROM users WHERE email='?' AND password = '?';", [$logged_email, $user_password]); 
+                
+                $mysqli->bind_param("ss", $logged_email, $user_password);
+                $mysqli->execute();
+                $result = $mysqli->get_result();     
                 
                 $_SESSION['email'] = $_POST["email"] ?? null;
-                $_SESSION['admin'] = $result->fetch_assoc()['admin'];                			
+                $_SESSION['admin'] = $result->fetch_assoc()['admin'];   
+                $this->refresh_app();
+                
             }
         }
         $mysqli->close();

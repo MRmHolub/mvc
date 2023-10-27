@@ -12,7 +12,7 @@ class Database_connection {
     function __construct() {}
 
     public function open() {               
-        $mysqli = new mysqli(
+        $this->mysqli = new mysqli(
           $this->db_host,
           $this->db_user,
           $this->db_password,
@@ -20,34 +20,35 @@ class Database_connection {
           //$db_port // pro TCP/IP spojení
         );
       
-        if ($mysqli->connect_error) {
-          echo 'Error: '.$mysqli->connect_error;
+        if ($this->mysqli->connect_error) {
+          echo 'Error: '.$this->mysqli->connect_error;
           exit();
         } 
-        return $mysqli;
+        return $this->mysqli;
     }
 
     function die(){
-        $mysqli->close();
+        $this->mysqli->close();
     }
 
-    public function secure_query($str, $vars_arr){
-        $mysqli = $mysqli->prepare($str);             
-        
-        $param_str='';
-
-        foreach ($vars_arr as $arg){
-            $param_str = $param_str . 's';
-        }
-
-        $bind_param_args = array_merge([$param_str], $bind_params);
-        call_user_func_array([$mysqli, 'bind_param'], $bind_param_args);    //instead of $mysqli->bind_param($param_str, arg 1, arg 2); 
-           
-        $mysqli->execute();
-        
-        return $mysqli->get_result();
-    }
-}
+    //public function secure_query($str, $vars_arr){
+//
+    //    $this->mysqli = $this->mysqli->prepare($str);             
+    //    
+    //    $param_str='';
+//
+    //    foreach ($vars_arr as $arg){
+    //        $param_str .= 's';
+    //    }
+    //    $mysqli = $this->mysqli->bind_param();
+    //    $vars_arr = array_merge([$param_str], $vars_arr);    
+    //    call_user_func($mysqli, $vars_arr);    //instead of $mysqli->bind_param($param_str, arg 1, arg 2); 
+    //       
+    //    $this->mysqli->execute();
+    //    
+    //    return $this->mysqli->get_result();
+    //}
+}//
 
 
 ?>
