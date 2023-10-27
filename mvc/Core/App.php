@@ -25,21 +25,22 @@ class App {
     public function call_controller(){
 
       $controller = $this->router->controller;
-
+      
       if ($controller) {      
           if (file_exists("Controllers/$controller.php")){
+            include "Views/nav.php";
             include "Controllers/$controller.php";  
           } else { 
-            header("Location: $this->domena/");
+            header("Location: $this->domena");
           }
         } else {
-          include "Controllers/dashboard.php";
+          include "Views/nav.php";
+          include "Controllers/dashboard.php";          
         }
     }
 
     public function process_request(){
-      if ($this->autorized) {  
-          include "Views/nav.php";
+      if ($this->autorized) {            
           $this->router = new Router($_GET['url']);
         } else {
           $this->router = new Router("login");
