@@ -8,8 +8,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <link rel="stylesheet" href="./bootstrap.css">
-      <link rel="stylesheet" href="./bootstrap-icons.css">
+      <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap.css">
+      <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap-icons.css">
     </head>
 
     <style>
@@ -25,7 +25,7 @@
 
     .sidebar-sticky {
       height: calc(100vh - 48px);
-      overflow-x: hidden;
+      overflow-x: auto;
       overflow-y: auto;
     }
 
@@ -44,29 +44,29 @@
     .move_me {
       margin-left: 300px;
     }
+
+    .half {
+      flex: 1 0 0;
+      max-width: 60%;
+      margin-bottom: 2em;
+    }
+
+
     .behind {
       display: inline-block;      
     }
 
     </style>
     <body>
-
-
-      <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <button class="navbar-toggler d-md-none collapsed m-2 b-0" type="button" data-bs-toggle="collapse"
-          data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
+      <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">        
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">simple administration</a>
-
         <div class="navbar-nav">
           <div class="nav-item text-nowrap">            
-            <a class="nav-link px-3" href="logout">logout</a>
+            <a class="nav-link px-3" href="//localhost/mvc/logout">logout</a>
           </div>
         </div>
       </header>
-          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
             <div class="position-sticky pt-3 sidebar-sticky">
               <ul class="nav flex-column">
                 <li class="nav-item">
@@ -78,7 +78,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="items" class="nav-link link-dark">
+                  <a href="//localhost/mvc/items" class="nav-link link-dark">
                     <span class="icon">
                       <i class="bi bi-card-list"></i>
                     </span>
@@ -86,7 +86,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="others" class="nav-link link-dark">
+                  <a href="//localhost/mvc/others" class="nav-link link-dark">
                     <span class="icon">
                       <i class="bi bi-box"></i>
                     </span>
@@ -94,7 +94,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="users" class="nav-link link-dark">
+                  <a href="//localhost/mvc/users" class="nav-link link-dark">
                     <span class="icon">
                       <i class="bi bi-person-circle"></i>
                     </span>
@@ -105,7 +105,7 @@
             </div>
           </nav>
 
-      <script src="./bootstrap.js"></script>
+      <script src="//localhost/mvc/Views/bootstrap.js"></script>
     </body>
 
     </html>
