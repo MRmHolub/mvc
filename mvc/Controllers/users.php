@@ -63,9 +63,8 @@ if ($this->router->method == '') {
   }
 
 } else if ($this->router->method == 'delete') {				
-
+    $delete_email = $this->router->params[0];
     $mysqli = $this->db->open();	
-    $delete_email = $mysqli->real_escape_string($_POST['email']) ?? null;	
     $mysqli = $mysqli->prepare("DELETE FROM users WHERE email=?;");
     $mysqli->bind_param("s",$delete_email);
     $mysqli->execute();	

@@ -33,7 +33,14 @@ echo "
         
         <button type='submit' class='btn btn-success float-end'>Add user</button>
     </form>
-
+    <dialog id='dialog' class='move_me dialog'>
+        <p id='dialog__text'>Do you really want to delete
+        <span id='dialog__item-to-delete'>X</span>? This action cannot be undone.</p>        
+        <form method='dialog'>
+            <a href='' id = 'dialog__confirm-link' type='button' class='btn btn-success float-end'>Confirm</a>
+            <a href='' type='button' onclick='closeDeleteDialog()' class='btn btn-danger' data-bs-dismiss='modal'>Close</a>          
+        </form>
+    </dialog>
     <table>
         <thead>
         <tr>						
@@ -70,11 +77,8 @@ while ($row = $query_result->fetch_assoc()) {
                 <form method='POST' action='$this->domena/users/edit' style='display: inline-block;'>
                     <input type='hidden' name='clicked_user' value='$email'>
                     <button type='submit' class='btn btn-warning'>Edit</button>
-                </form>      
-                <form method='POST' action='$this->domena/users/delete' style='display: inline-block;'>
-                    <input type='hidden' name='email' value='$email'>
-                    <button type='submit' class='btn btn-danger'>Delete</button>
-                </form>                    
+                </form>                                  
+                    <button class='btn btn-danger button--delete' data-action='users/delete/$email'>Delete</button>                      
         </tr>";
     } else {
         echo "                                          
@@ -84,5 +88,33 @@ while ($row = $query_result->fetch_assoc()) {
         
     }	
 
-    echo "</tbody></table>";
+    echo "</tbody>
+        </table>           
+   
+
+<script>
+    const deleteButtons = document.querySelectorAll('.button--delete');      
+    deleteButtons.forEach(b => b.addEventListener('click', e => {
+        const dialog = document.getElementById('dialog');
+        const action = b.dataset.action; 
+        
+       
+        const item = document.getElementById('dialog__item-to-delete');
+        item.innerHTML = action.split('/').pop();
+        
+       
+        const link = document.getElementById('dialog__confirm-link');
+        link.setAttribute('href', action);
+        
+        dialog.showModal();
+    }));
+
+    function closeDeleteDialog() {
+        const dialog = document.getElementById('dialog');
+        dialog.close();
+    }      
+
+
+</script>
+    ";
     ?>

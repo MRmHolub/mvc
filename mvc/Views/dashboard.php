@@ -38,5 +38,5 @@ while ($row = $query_result->fetch_assoc()) { //nebudu to třídit protože se m
     </tr>";  
 }      
 
-echo "</tbody></table>";
+echo '</tbody></table>';
 ?>

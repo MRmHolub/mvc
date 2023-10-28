@@ -42,7 +42,7 @@
     }
 
     .move_me {
-      margin-left: 300px;
+      margin-left: 300px !important;
     }
 
     .half {
@@ -56,8 +56,14 @@
       display: inline-block;      
     }
 
+    .dialog {
+      width: 16em;
+      text-align: center;
+    }
+
     </style>
     <body>
+     
       <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">        
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">simple administration</a>
         <div class="navbar-nav">
@@ -102,10 +108,17 @@
                   </a>
                 </li>
               </ul>
-            </div>
+            </div>            
           </nav>
 
-      <script src="//localhost/mvc/Views/bootstrap.js"></script>
+          <main>
+           
+          </main>
+
+          
+      
+
+      <script src="//localhost/mvc/Views/bootstrap.js"></script>      
     </body>
 
     </html>
