@@ -17,7 +17,7 @@ try {
     
   if ($controller) {      
       if (file_exists("Controllers/$controller.php")){    
-          if ($controller != 'API' && $controller != 'api') {
+          if ($controller != 'API' && $controller != 'api' && $controller != 'login') {
             include "Views/nav.php";
           }
           include "Controllers/$controller.php";  

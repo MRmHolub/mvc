@@ -1,7 +1,7 @@
 <?php 
 echo "
 <h2 class='move_me'>Change user information</h2>
-<form name='new_user' class='move_me' method='POST' action='$this->domena/users/update'>						
+<form name='new_user' class='move_me' method='POST' action='$domena/users/update'>						
 <label for='name'>name:</label>
 <input type='text' id='name' name='name' placeholder='Enter your name' value='$name' required>
 <br>
@@ -41,6 +41,5 @@ if ($is_admin == "true"){
     <button type='submit' class='btn btn-warning'>Save</button>			
     </form>";		
 }
-
 
 ?>

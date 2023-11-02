@@ -48,6 +48,16 @@ class Database_connection {
         $mysqli->close();	
         return $row;
     }
+
+    function load_user_data_id($id){
+        $mysqli = $this->open();	        
+        $mysqli = $mysqli->prepare("SELECT * FROM users WHERE id=?;");
+        $mysqli->bind_param("s",$id);
+        $mysqli->execute();
+        $row = $mysqli->get_result()->fetch_assoc();      
+        $mysqli->close();	
+        return $row;
+    }
     
     function load_users(){
         $mysqli = $this->open();
@@ -80,7 +90,7 @@ class Database_connection {
         $mysqli = $this->open();	             
         $mysqli = $mysqli->prepare("SELECT admin FROM users WHERE email=?;");
         
-        $mysqli->bind_param("ss", $logged_email);
+        $mysqli->bind_param("s", $logged_email);
         $mysqli->execute();
         $result = $mysqli->get_result();    
         return $result->fetch_assoc()['admin'];

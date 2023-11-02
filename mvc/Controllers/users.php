@@ -1,11 +1,8 @@
 <?php
-include "Models/users.php";
 
 if ($router->method == '') {
-  $mysqli = $db->open();	
   $i = 0;
-  $query_result = $mysqli->query("SELECT * FROM users ORDER BY last_login;"); 
-  $mysqli->close();
+  $query_result = $db->load_users();  
 
   include "Views/users/users.php";
   
@@ -21,7 +18,7 @@ if ($router->method == '') {
     $phone =$_POST['phone'];
     $is_admin = $_POST['admin'];  
     
-    update_user($name, $password, $last, $email, $workplace, $phone, $is_admin, $_SESSION['clicked_user']);
+    $db->update_user($name, $last, $email, $workplace, $phone, $is_admin, $password, $_SESSION['clicked_user']);
    
   } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -38,7 +35,7 @@ else if ($router->method == 'edit') {
     if ($clicked_email){
       $_SESSION['clicked_user'] = $clicked_email;
 
-      $row = load_user_data($clicked_email);
+      $row = $db->load_user_data($clicked_email);
 
       $name = $row['name'];
       $last = $row['last'];
@@ -56,7 +53,7 @@ else if ($router->method == 'edit') {
 } 
 else if ($router->method == 'delete') {				
     $delete_id = $router->params[0];
-    delete_user($delete_id);
+    $db->delete_user($delete_id);
     header("Location: $domena/users");
 
 } else if ($router->method == 'add'){
@@ -70,13 +67,13 @@ else if ($router->method == 'delete') {
     $phone = $_POST['phone'];
     $is_admin = $_POST['admin'];  
     
-    $query = load_user_data($email);    
+    $user = $db->load_user_data($email);    
     $added = false;
-    if (mysqli_num_rows($query) == 0 ){        	
+    if (!$user){        	
         $mysqli->query("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('$name', '$last', '$password', '$email', '$phone', '$workplace', '$is_admin');");         
         $added = true;        
     }
-    //$query_result = load_users();
+    $query_result = $db->load_users();
     include "Views/users/add.php";            
 
     //$mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('?', '?', '?', '?', '?', '?', '?');"); 
