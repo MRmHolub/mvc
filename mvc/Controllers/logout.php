@@ -1,7 +1,8 @@
-<?php 	
-	$mysqli = $this->db->open();
+<?php 		
 	$time = date("y-m-d h:i:s");	
-	$email = $this->get_autorized();	
+	$email = $_SESSION["email"];
+	
+	$mysqli = $db->open();
 	$mysqli->query("UPDATE users SET last_login='$time' WHERE email='$email';");
 	$mysqli->close();
 	

@@ -16,10 +16,7 @@ class App {
       session_start();
 
       $this->autorized = $_SESSION['email'] ?? null;    
-      $this->admin = $_SESSION['admin'] ?? null;      
-      $this->db = new Database_connection();      
-
-      //this is where the controller, views code is then inserted
+      $this->admin = $_SESSION['admin'] ?? null;                
   }
 
     public function call_controller(){
@@ -27,8 +24,10 @@ class App {
       $controller = $this->router->controller;
       
       if ($controller) {      
-          if (file_exists("Controllers/$controller.php")){
-            include "Views/nav.php";
+          if (file_exists("Controllers/$controller.php")){    
+            if ($controller != 'api') {
+              include "Views/nav.php";
+            }
             include "Controllers/$controller.php";  
           } else { 
             header("Location: $this->domena");
@@ -60,6 +59,7 @@ class App {
       $this->autorized = $_SESSION['email'] ?? null;    
       $this->admin = $_SESSION['admin'] ?? null;      
     }
+
   
 }
 ?>

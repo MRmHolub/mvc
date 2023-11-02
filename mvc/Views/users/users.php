@@ -56,7 +56,8 @@ echo "
 
     
 while ($row = $query_result->fetch_assoc()) {
-    $i = $i + 1;
+
+    $id = $row['id'];
     $name = $row['name'];
     $last = $row['last'];
     $email = $row['email'];
@@ -78,7 +79,7 @@ while ($row = $query_result->fetch_assoc()) {
                     <input type='hidden' name='clicked_user' value='$email'>
                     <button type='submit' class='btn btn-warning'>Edit</button>
                 </form>                                  
-                    <button class='btn btn-danger button--delete' data-action='users/delete/$email'>Delete</button>                      
+                    <button class='btn btn-danger button--delete' data-action='users/delete/$id/$email'>Delete</button>                      
         </tr>";
     } else {
         echo "                                          
@@ -95,15 +96,15 @@ while ($row = $query_result->fetch_assoc()) {
 <script>
     const deleteButtons = document.querySelectorAll('.button--delete');      
     deleteButtons.forEach(b => b.addEventListener('click', e => {
-        const dialog = document.getElementById('dialog');
-        const action = b.dataset.action; 
-        
+        const dialog = document.getElementById('dialog');        
+        var action = b.dataset.action;
        
         const item = document.getElementById('dialog__item-to-delete');
         item.innerHTML = action.split('/').pop();
         
        
         const link = document.getElementById('dialog__confirm-link');
+        action = b.dataset.action.replace('.', ''); 
         link.setAttribute('href', action);
         
         dialog.showModal();
@@ -112,8 +113,7 @@ while ($row = $query_result->fetch_assoc()) {
     function closeDeleteDialog() {
         const dialog = document.getElementById('dialog');
         dialog.close();
-    }      
-
+    }     
 
 </script>
     ";

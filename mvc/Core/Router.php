@@ -11,10 +11,10 @@
 
 class Router {
 
-    public $controller;
-    public $method;
+    public $controller = null;
+    public $method = null;
     public $num_of_params;    
-    public $params_arr;
+    public $params;
 
     public function __construct($url) {        
         $this->process_URL($url);
@@ -25,11 +25,11 @@ class Router {
 
         $this->controller = $URL_arr[0] ?? null;
         $this->method = $URL_arr[1] ?? null;
-        $this->num_of_params = count($URL_arr);
-    
+        $this->num_of_params = count($URL_arr);                        
+
         $this->params = [];
         for ($i = 2; $i < $this->num_of_params; $i++) {
-            $this->params[] = $URL_arr[$i] ?? null;
+            if ($this->params != '') $this->params[] = $URL_arr[$i] ?? null;            
         }
 
         //return ['controller' => $controller, 'method' => $method, 'params' => $params];

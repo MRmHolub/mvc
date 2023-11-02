@@ -6,13 +6,11 @@ try {
 
   $app = new App();
 
+  $db = new Database_connection();  
+
   $app->process_request();
   $app->call_controller();
-
-  echo $app->get_autorized();
-
-
-
+  
 
 } catch (Exception $e){
   echo 'Caught exception: ',  $e->getMessage(), "\n";

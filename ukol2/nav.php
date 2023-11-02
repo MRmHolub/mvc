@@ -8,14 +8,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap.css">
-      <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap-icons.css">
+      <link rel="stylesheet" href="./bootstrap.css">
+      <link rel="stylesheet" href="./bootstrap-icons.css">
     </head>
 
     <style>
     /* some hacks for responsive sidebar */
     .sidebar {
-      max-width: 250px;
       position: fixed;
       top: 0;
       left: 0;
@@ -25,59 +24,36 @@
 
     .sidebar-sticky {
       height: calc(100vh - 48px);
-      overflow-x: auto;
+      overflow-x: hidden;
       overflow-y: auto;
     }
 
     h1 {
-      margin-left: 300px;
-      max-width: 60%;
+      margin-left: 400px;
     }
 
-    table {
-        margin-left: 300px;
-        width: 60%;
-    }
-
-    td {
-      padding: 15px 10px;
-    }
-
-    .move_me {
-      margin-left: 300px !important;
-    }
-
-    .half {
-      flex: 1 0 0;
-      max-width: 60%;
-      margin-bottom: 2em;
-    }
-
-
-    .behind {
-      display: inline-block;      
-    }
-
-    .dialog {
-      width: 16em;
-      text-align: center;
-    }
-
-    .notification {
-      max-width: 60%;
-    }
     </style>
     <body>
-     
-      <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">        
+
+
+      <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <button class="navbar-toggler d-md-none collapsed m-2 b-0" type="button" data-bs-toggle="collapse"
+          data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">simple administration</a>
+
         <div class="navbar-nav">
           <div class="nav-item text-nowrap">            
-            <a class="nav-link px-3" href="//localhost/mvc/logout">logout</a>
+            <a class="nav-link px-3" href="logout">logout</a>
           </div>
         </div>
       </header>
-          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+
+      <div class="container-fluid">
+        <div class="row">
+          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3 sidebar-sticky">
               <ul class="nav flex-column">
                 <li class="nav-item">
@@ -89,7 +65,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="//localhost/mvc/items" class="nav-link link-dark">
+                  <a href="items" class="nav-link link-dark">
                     <span class="icon">
                       <i class="bi bi-card-list"></i>
                     </span>
@@ -97,7 +73,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="//localhost/mvc/others" class="nav-link link-dark">
+                  <a href="others" class="nav-link link-dark">
                     <span class="icon">
                       <i class="bi bi-box"></i>
                     </span>
@@ -105,7 +81,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="//localhost/mvc/users" class="nav-link link-dark">
+                  <a href="users" class="nav-link link-dark">
                     <span class="icon">
                       <i class="bi bi-person-circle"></i>
                     </span>
@@ -113,17 +89,10 @@
                   </a>
                 </li>
               </ul>
-            </div>            
+            </div>
           </nav>
 
-          <main>
-           
-          </main>
-
-          
-      
-
-      <script src="//localhost/mvc/Views/bootstrap.js"></script>      
+      <script src="./bootstrap.js"></script>
     </body>
 
     </html>
