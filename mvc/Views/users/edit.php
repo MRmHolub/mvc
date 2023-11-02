@@ -24,19 +24,19 @@ echo "
 ";
 if ($is_admin == "true"){	
     echo 
-    "<input type='radio' id='admin' name='admin' value='true'>
-    <label for='admin'>No</label>
-    <input type='radio' id='not_admin' name='admin' value='false' checked>
-    <label for='not_admin'>Yes</label>
+    "<input type='radio' id='admin' name='admin' value='true' checked>
+    <label for='admin'>Yes</label>
+    <input type='radio' id='not_admin' name='admin' value='false'>
+    <label for='not_admin'>No</label>
     <br>
     <button type='submit' class='btn btn-warning'>Save</button>			
     </form>";		
 } else {
     echo 
-    "<input type='radio' id='admin' name='admin' value='true' checked>
-    <label for='admin'>No</label>
-    <input type='radio' id='not_admin' name='admin' value='false'>
-    <label for='not_admin'>Yes</label>
+    "<input type='radio' id='admin' name='admin' value='true'>
+    <label for='admin'>Yes</label>
+    <input type='radio' id='not_admin' name='admin' value='false' checked>
+    <label for='not_admin'>No</label>
     <br>
     <button type='submit' class='btn btn-warning'>Save</button>			
     </form>";		
