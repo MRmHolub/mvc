@@ -9,7 +9,6 @@ class Database_connection {
 
     public $mysqli;
 
-    function __construct() {}
 
     public function open() {               
         $this->mysqli = new mysqli(
@@ -32,7 +31,7 @@ class Database_connection {
     }
 
     function update_user($name, $last, $email, $workplace, $phone, $is_admin, $password, $email_of_user){
-        $mysqli = $this->db->open();
+        $mysqli = $this->open();
         $mysqli = $mysqli->prepare("UPDATE users SET name=?, last=?, email=?, workplace=?, phone=?, admin=?, password=? WHERE email=?;");
         $mysqli->bind_param("ssssssss",$name, $last, $email, $workplace, $phone, $is_admin, $password, $email_of_user);
         $mysqli->execute();
@@ -41,7 +40,7 @@ class Database_connection {
     
     
     function load_user_data($clicked){
-        $mysqli = $this->db->open();	        
+        $mysqli = $this->open();	        
         $mysqli = $mysqli->prepare("SELECT * FROM users WHERE email=?;");
         $mysqli->bind_param("s",$clicked);
         $mysqli->execute();
@@ -51,38 +50,43 @@ class Database_connection {
     }
     
     function load_users(){
-        $mysqli = $this->db->open();
+        $mysqli = $this->open();
         $users = $mysqli->query("SELECT * FROM users ORDER BY last_login;"); 
         $mysqli->close();
         return $users;
     }
     
     function delete_user($id){
-        $mysqli = $this->db->open();	
+        $mysqli = $this->open();	
         $mysqli = $mysqli->prepare("DELETE FROM users WHERE id=?;");
         $mysqli->bind_param("s",$id);
         $mysqli->execute();	
         $mysqli->close();
     }
 
-    //public function secure_query($str, $vars_arr){
-//
-    //    $this->mysqli = $this->mysqli->prepare($str);             
-    //    
-    //    $param_str='';
-//
-    //    foreach ($vars_arr as $arg){
-    //        $param_str .= 's';
-    //    }
-    //    $mysqli = $this->mysqli->bind_param();
-    //    $vars_arr = array_merge([$param_str], $vars_arr);    
-    //    call_user_func($mysqli, $vars_arr);    //instead of $mysqli->bind_param($param_str, arg 1, arg 2); 
-    //       
-    //    $this->mysqli->execute();
-    //    
-    //    return $this->mysqli->get_result();
-    //}
-}//
+    function get_user_password($logged_email){
+        $mysqli = $this->open();		
+        $mysqli = $mysqli->prepare("SELECT password FROM users WHERE email = ?;");
+        $mysqli->bind_param("s", $logged_email);
+        $mysqli->execute();
+        
+        $query_result = $mysqli->get_result();  
+        return $query_result->fetch_assoc()['password'];				            						
+    
+        $mysqli->close();
+    }
+    
+    function get_user_admin($logged_email){
+        $mysqli = $this->open();	             
+        $mysqli = $mysqli->prepare("SELECT admin FROM users WHERE email=?;");
+        
+        $mysqli->bind_param("ss", $logged_email);
+        $mysqli->execute();
+        $result = $mysqli->get_result();    
+        return $result->fetch_assoc()['admin'];
+    }
+
+}
 
 
 ?>

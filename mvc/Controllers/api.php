@@ -1,34 +1,37 @@
 <?php
-    include "Models/users.php";
+    
 
     $_SESSION['user_list'] = [];
 
-    $method = $this->router->method;
-    $params_arr = $this->router->params ?? null;
+    $method = $router->method;
+    $params_arr = $router->params ?? null;
 
 
     if ($method == 'get'){          
         if ($params_arr){            
-            $data[] = load_user_data($params_arr[0]);
+            $data[] = $db->load_user_data($params_arr[0]);
         } else {
             $data = [];
-            $query_result = load_users();
+            $query_result = $db->load_users();
             while($row = $query_result->fetch_assoc()){            
                 $data[] = $row;                
             }  
         }                                        
         
-        if ($data) {                                   
+        if ($data[0]) {                                   
             $fp = fopen('data.csv', 'w');
             
             foreach ($data as $row) {
                 fputcsv($fp, $row);
             }            
             fclose($fp);
-            //header("Content-Type: application/json");                
+            header("Content-Type: application/json");                
             echo readfile('data.csv');
     
-        } else echo "Requested user does not exist";
+        } else {            
+            header("Content-Type: application/json");  
+            echo "Requested user does not exist";
+        }
 
     } else {    
         $mysqli = $db->open();
@@ -46,13 +49,13 @@
         }
         else if ($method == 'delete'){        
             if ($params_arr){
-                delete_user($params_arr[0]);
+                $db->delete_user($params_arr[0]);
             }        
         } else {
             echo "Incorrect API request";
         }
         $mysqli->close();
-        //header("Content-Type: application/json");            
+        header("Content-Type: application/json");            
         
     }
     

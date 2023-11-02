@@ -2,7 +2,7 @@
 echo "
     <h1 class='move_me'>Přihlášený uživatel: $_SESSION[autorized] </h1>
     <h2 class='move_me'>Add new user</h2>
-    <form name='new_user' class='move_me half' method='POST' action='$this->domena/users/add'>						    
+    <form name='new_user' class='move_me half' method='POST' action='$domena/users/add'>						    
     
         <label for='name'>Name</label>
         <input class='form-control' type='text' id='name' name='name' placeholder='Enter your name' required>        
@@ -75,7 +75,7 @@ while ($row = $query_result->fetch_assoc()) {
 
     if ($_SESSION["admin"] == "true" || $email == $_SESSION["email"]){   
         echo "<td>           
-                <form method='POST' action='$this->domena/users/edit' style='display: inline-block;'>
+                <form method='POST' action='$domena/users/edit' style='display: inline-block;'>
                     <input type='hidden' name='clicked_user' value='$email'>
                     <button type='submit' class='btn btn-warning'>Edit</button>
                 </form>                                  

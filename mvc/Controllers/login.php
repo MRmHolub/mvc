@@ -18,7 +18,7 @@
                 $this->refresh_app();                
             }
         }        
-        header("Location: $this->domena/");
+        header("Location: $domena/");
     } else {
         include "Views/login.php";
     }

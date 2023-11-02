@@ -1,7 +1,7 @@
 <?php
 include "Models/users.php";
 
-if ($this->router->method == '') {
+if ($router->method == '') {
   $mysqli = $db->open();	
   $i = 0;
   $query_result = $mysqli->query("SELECT * FROM users ORDER BY last_login;"); 
@@ -9,7 +9,7 @@ if ($this->router->method == '') {
 
   include "Views/users/users.php";
   
-} else if ($this->router->method == 'update') {
+} else if ($router->method == 'update') {
   
   try {
     $mysqli = $db->open();	
@@ -28,10 +28,10 @@ if ($this->router->method == '') {
   }
   
   unset($_SESSION['clicked_user']);
-  header("Location: $this->domena/users");
+  header("Location: $domena/users");
 } 
 
-else if ($this->router->method == 'edit') {    
+else if ($router->method == 'edit') {    
   try {
     $clicked_email = $_POST['clicked_user'];
     
@@ -54,12 +54,12 @@ else if ($this->router->method == 'edit') {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
   }
 } 
-else if ($this->router->method == 'delete') {				
-    $delete_id = $this->router->params[0];
+else if ($router->method == 'delete') {				
+    $delete_id = $router->params[0];
     delete_user($delete_id);
-    header("Location: $this->domena/users");
+    header("Location: $domena/users");
 
-} else if ($this->router->method == 'add'){
+} else if ($router->method == 'add'){
     
     $mysqli = $db->open();	
     $name = $_POST['name'];		
@@ -81,7 +81,7 @@ else if ($this->router->method == 'delete') {
 
     //$mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('?', '?', '?', '?', '?', '?', '?');"); 
 } else {
-  header("Location: $this->domena");
+  header("Location: $domena");
   include "Views/does_not_exist.php";
 }
 

@@ -9,5 +9,5 @@
 	unset($_SESSION['email']);
 	unset($_SESSION["admin"]);
 
-	header("Location: $this->domena/");
+	header("Location: $domena/");
 ?>
