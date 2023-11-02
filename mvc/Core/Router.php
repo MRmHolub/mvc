@@ -20,8 +20,11 @@ class Router {
         $this->process_URL($url);
     }
 
-    public function process_URL($url){
+    public function process_URL($url){                        
+        
         $URL_arr = explode('/', $url ?? '');
+        
+        //echo print_r($URL_arr);
 
         $this->controller = $URL_arr[0] ?? null;
         $this->method = $URL_arr[1] ?? null;

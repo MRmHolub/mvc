@@ -9,7 +9,7 @@
 
     if ($method == 'get'){          
         if ($params_arr){            
-            $data[] = $db->load_user_data($params_arr[0]);
+            $data[] = $db->load_user_data_id($params_arr[0]);
         } else {
             $data = [];
             $query_result = $db->load_users();
@@ -17,7 +17,7 @@
                 $data[] = $row;                
             }  
         }                                        
-        
+    
         if ($data[0]) {                                   
             $fp = fopen('data.csv', 'w');
             
@@ -53,8 +53,10 @@
         else if ($method == 'update' && $params_arr){                               
             $user = $db->load_user_data_id($params_arr[0]);                                
             if ($user) {
-                $mysqli->query("UPDATE users SET name='$params_arr[1]' last='$params_arr[2]' WHERE id=$params_arr[0];");
-                echo "User $user[email] was updated successfully";
+                if (count($params_arr) > 2){
+                    $mysqli->query("UPDATE users SET name='$params_arr[1]', last='$params_arr[2]' WHERE id=$params_arr[0];");
+                    echo "User $user[email] was updated successfully";
+                } else echo "Not enough params";
             }
             else echo "Wrong ID parameter";
         }
@@ -72,10 +74,7 @@
         }
 
         $mysqli->close();
-        header("Content-Type: application/json");            
-        
-    }
-
-    
+        header("Content-Type: application/json");                    
+    }    
     
 ?>
