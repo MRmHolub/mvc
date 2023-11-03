@@ -38,7 +38,18 @@ class Database_connection {
         $mysqli->close();
     }
     
+    function update_user_api($user, $name, $last){        
+        update_user($name, $last, $user['email'], $user['workplace'],$user['phone'], $user['admin'], $user['password'], $user['email']);
+    }
     
+    function add_user($name, $last, $email){
+        $mysqli = $this->open();
+        $mysqli = $mysqli->prepare("INSERT INTO users (name, last, email) VALUES (?,?,?)");
+        $mysqli->bind_param("sss",$name, $last, $email);
+        $mysqli->execute();
+        $mysqli->close();        
+    }
+
     function load_user_data($clicked){
         $mysqli = $this->open();	        
         $mysqli = $mysqli->prepare("SELECT * FROM users WHERE email=?;");

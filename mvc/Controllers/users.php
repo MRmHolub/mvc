@@ -74,7 +74,8 @@ else if ($router->method == 'delete') {
         $added = true;        
     }
     $query_result = $db->load_users();
-    include "Views/users/add.php";            
+    include "Views/users/add.php";   
+    include "Views/users/users.php";         
 
     //$mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('?', '?', '?', '?', '?', '?', '?');"); 
 } else {

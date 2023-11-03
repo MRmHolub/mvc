@@ -2,25 +2,25 @@
 echo "
     <h1 class='move_me'>Přihlášený uživatel: $_SESSION[autorized] </h1>
     <h2 class='move_me'>Add new user</h2>
-    <form name='new_user' class='move_me half' method='POST' action='$domena/users/add'>						    
+    <form id='add_user' name='new_user' class='move_me half' method='POST' action='$domena/users/add'>						    
     
         <label for='name'>Name</label>
-        <input class='form-control' type='text' id='name' name='name' placeholder='Enter your name' required>        
+        <input class='form-control require' type='text' id='name' name='name' placeholder='Enter your name' >        
 
         <label for='last'>Last</label>
-        <input class='form-control' type='text' id='last' name='last' placeholder='Enter your last name' required>                
+        <input class='form-control require' type='text' id='last' name='last' placeholder='Enter your last name' >                
 
         <label for='email'>Email</label>
-        <input class='form-control' type='text' id='email' name='email' placeholder='Enter your email' required>        
+        <input class='form-control require' type='email' id='emailos' name='email' placeholder='Enter your email'>        
 
         <label for='phone'>Phone</label>
-        <input class='form-control' type='text' id='phone' name='phone' placeholder='Enter your phone' required>        
+        <input class='form-control require' type='text' id='phone' name='phone' placeholder='Enter your phone' >        
 
         <label for='password'>Password</label>
-        <input class='form-control' type='password' id='password' name='password' placeholder='Enter your password' required>        
+        <input class='form-control require' type='password' id='password' name='password' placeholder='Enter your password' >        
 
         <label for='workplace'>Workplace</label>
-        <input class='form-control' type='text' id='workplace' name='workplace' placeholder='Enter your workplace' required>                
+        <input class='form-control require' type='text' id='workplace' name='workplace' placeholder='Enter your workplace' >                
         
         <div>
             <span>Permissions</span>
@@ -31,9 +31,9 @@ echo "
             <label for='not_admin'>Basic User</label>            
         </div>
         
-        <button type='submit' class='btn btn-success float-end'>Add user</button>
+        <button type='submit' id='add_user_btn' class='btn btn-success float-end'>Add user</button>
     </form>
-    <dialog id='dialog' class='move_me dialog'>
+    <dialog id='dialog' class='dialog'>
         <p id='dialog__text'>Do you really want to delete
         <span id='dialog__item-to-delete'>X</span>? This action cannot be undone.</p>        
         <form method='dialog'>
@@ -94,15 +94,15 @@ while ($row = $query_result->fetch_assoc()) {
    
 
 <script>
-    const deleteButtons = document.querySelectorAll('.button--delete');      
+    const deleteButtons = document.querySelectorAll('.button--delete');  
+
     deleteButtons.forEach(b => b.addEventListener('click', e => {
         const dialog = document.getElementById('dialog');        
         var action = b.dataset.action;
        
         const item = document.getElementById('dialog__item-to-delete');
         item.innerHTML = action.split('/').pop();
-        
-       
+               
         const link = document.getElementById('dialog__confirm-link');
         action = b.dataset.action.replace('.', ''); 
         link.setAttribute('href', action);
@@ -113,7 +113,7 @@ while ($row = $query_result->fetch_assoc()) {
     function closeDeleteDialog() {
         const dialog = document.getElementById('dialog');
         dialog.close();
-    }     
+    }   
 
 </script>
     ";

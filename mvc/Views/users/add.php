@@ -30,7 +30,4 @@ echo "
     ";
 
 
-    include "Views/users/users.php";
-
-
 ?>

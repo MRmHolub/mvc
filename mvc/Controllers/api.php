@@ -35,15 +35,15 @@
 
     } else {    
 
-        $mysqli = $db->open();
+        
 
         if ($method == 'post'){                
             try {
                 if (count($params_arr) > 2){
                     $user = $db->load_user_data($params_arr[2]);
                     if ($user == null){                                  
-                        $mysqli->query("INSERT INTO users (name, last, email) VALUES ('$params_arr[0]','$params_arr[1]', '$params_arr[2]');");
-                        if (!$mysqli->error) echo "User $params_arr[2] was added successfully";
+                        $db->add_user($params_arr[0], $params_arr[1], $params_arr[2]);
+                        echo "User $params_arr[2] was added successfully";
                     } else echo "This email is already in use";
                 } else echo "Not enough params";
             } catch (Exception $e) {
@@ -54,7 +54,7 @@
             $user = $db->load_user_data_id($params_arr[0]);                                
             if ($user) {
                 if (count($params_arr) > 2){
-                    $mysqli->query("UPDATE users SET name='$params_arr[1]', last='$params_arr[2]' WHERE id=$params_arr[0];");
+                    $db->update_user_api($user, $params_arr[1], $params_arr[2]);
                     echo "User $user[email] was updated successfully";
                 } else echo "Not enough params";
             }
@@ -69,11 +69,6 @@
             else echo "Wrong ID parameter";
         } else echo "Incorrect API request or missing/wrong params";
 
-        if ($mysqli->error){
-            echo "Incorrect API request params";
-        }
-
-        $mysqli->close();
         header("Content-Type: application/json");                    
     }    
     

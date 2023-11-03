@@ -1,6 +1,6 @@
 <?php
   echo '
-    <!doctype html>
+    <!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -10,63 +10,64 @@
 
       <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap.css">
       <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap-icons.css">
-    </head>
-
-    <style>
-    /* some hacks for responsive sidebar */
-    .sidebar {
-      max-width: 250px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 100;
-      padding: 48px 0 0; /* height of navbar */
-    }
-
-    .sidebar-sticky {
-      height: calc(100vh - 48px);
-      overflow-x: auto;
-      overflow-y: auto;
-    }
-
-    h1 {
-      margin-left: 300px;
-      max-width: 60%;
-    }
-
-    table {
+      <style>
+      /* some hacks for responsive sidebar */
+      .sidebar {
+        max-width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        padding: 48px 0 0; /* height of navbar */
+      }
+  
+      
+      .sidebar-sticky {
+        height: calc(100vh - 48px);
+        overflow-x: auto;
+        overflow-y: auto;
+      }
+  
+      h1 {
         margin-left: 300px;
-        width: 60%;
-    }
-
-    td {
-      padding: 15px 10px;
-    }
-
-    .move_me {
-      margin-left: 300px !important;
-    }
-
-    .half {
-      flex: 1 0 0;
-      max-width: 60%;
-      margin-bottom: 2em;
-    }
-
-
-    .behind {
-      display: inline-block;      
-    }
-
-    .dialog {
-      width: 16em;
-      text-align: center;
-    }
-
-    .notification {
-      max-width: 60%;
-    }
-    </style>
+        max-width: 60%;
+      }
+  
+      table {
+          margin-left: 300px;
+          width: 60%;
+      }
+  
+      td {
+        padding: 15px 10px;
+      }
+  
+      .move_me {
+        margin-left: 300px !important;
+      }
+  
+      .half {
+        flex: 1 0 0;
+        max-width: 60%;
+        margin-bottom: 2em;
+      }
+  
+  
+      .behind {
+        display: inline-block;      
+      }
+  
+      .dialog {
+        margin-left: calc(50%-8em);
+        width: 16em;
+        text-align: center;
+      }
+  
+      .notification {
+        max-width: 60%;
+      }
+      </style>
+      </head>
     <body>
      
       <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">        
@@ -117,15 +118,14 @@
           </nav>
 
           <main>
-           
+          
           </main>
 
           
       
 
-      <script src="//localhost/mvc/Views/bootstrap.js"></script>      
-    </body>
-
+          <script src="//localhost/mvc/Views/bootstrap.js"></script>  
+    </body>    
     </html>
-  '
+  ';
 ?>
