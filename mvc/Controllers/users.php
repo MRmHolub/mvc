@@ -9,7 +9,6 @@ if ($router->method == '') {
 } else if ($router->method == 'update') {
   
   try {
-    $mysqli = $db->open();	
     $name = $_POST['name'];		
     $password = $_POST['password'];
     $last =$_POST['last'];
@@ -57,8 +56,7 @@ else if ($router->method == 'delete') {
     header("Location: $domena/users");
 
 } else if ($router->method == 'add'){
-    
-    $mysqli = $db->open();	
+        
     $name = $_POST['name'];		
     $password = $_POST['password'];
     $last = $_POST['last'];
@@ -70,14 +68,15 @@ else if ($router->method == 'delete') {
     $user = $db->load_user_data($email);    
     $added = false;
     if (!$user){        	
-        $mysqli->query("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('$name', '$last', '$password', '$email', '$phone', '$workplace', '$is_admin');");         
+        $db->new_full_user($name, $last, $password, $email, $phone, $workplace, $is_admin);               
         $added = true;        
     }
+    
     $query_result = $db->load_users();
     include "Views/users/add.php";   
     include "Views/users/users.php";         
 
-    //$mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('?', '?', '?', '?', '?', '?', '?');"); 
+    
 } else {
   header("Location: $domena");
   include "Views/does_not_exist.php";

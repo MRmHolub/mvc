@@ -107,6 +107,29 @@ class Database_connection {
         return $result->fetch_assoc()['admin'];
     }
 
+    function update_last_login($email){
+        $time = date("y-m-d h:i:s");	
+        $mysqli = $this->open();
+        $mysqli->query("UPDATE users SET last_login='$time' WHERE email='$email';");
+        $mysqli->close();
+    }
+
+    function select_last_logged(){
+        $mysqli = $this->open();
+        $result = $mysqli->query("SELECT * FROM users ORDER BY last_login LIMIT 10;"); //Must be in db last 10 people
+        $mysqli->close();
+
+        return $result;
+    }
+
+    function new_full_user(){
+        $mysqli = $this->open();	             
+        $mysqli = $mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('?', '?', '?', '?', '?', '?', '?');"); 
+        
+        $mysqli->bind_param("sssssss", $name, $last, $password, $email, $phone, $workplace, $is_admin);
+        $mysqli->execute();
+    }
+
 }
 
 

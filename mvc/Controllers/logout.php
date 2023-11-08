@@ -1,10 +1,8 @@
-<?php 		
-	$time = date("y-m-d h:i:s");	
+<?php 			
 	$email = $_SESSION["email"];
 	
-	$mysqli = $db->open();
-	$mysqli->query("UPDATE users SET last_login='$time' WHERE email='$email';");
-	$mysqli->close();
+	
+	$db->update_last_login($email);	
 	
 	unset($_SESSION['email']);
 	unset($_SESSION["admin"]);
