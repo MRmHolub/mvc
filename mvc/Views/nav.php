@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap.css">
-      <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap-icons.css">
+      <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap-icons.css">                    
       <style>
       /* some hacks for responsive sidebar */
       .sidebar {
@@ -117,15 +117,6 @@
             </div>            
           </nav>
 
-          <main>
-          
-          </main>
-
-          
-      
-
-          <script src="//localhost/mvc/Views/bootstrap.js"></script>  
-    </body>    
-    </html>
+          <main>          
   ';
 ?>

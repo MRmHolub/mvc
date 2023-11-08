@@ -27,6 +27,7 @@ try {
     include "Controllers/dashboard.php";          
   }    
 
+  include 'Controllers/end_of_page.php';
 
 } catch (Exception $e){
   echo 'Caught exception: ',  $e->getMessage(), "\n";

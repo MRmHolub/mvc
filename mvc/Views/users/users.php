@@ -37,8 +37,8 @@ echo "
         <p id='dialog__text'>Do you really want to delete
         <span id='dialog__item-to-delete'>X</span>? This action cannot be undone.</p>        
         <form method='dialog'>
-            <a href='' id = 'dialog__confirm-link' type='button' class='btn btn-success float-end'>Confirm</a>
-            <a href='' type='button' onclick='closeDeleteDialog()' class='btn btn-danger' data-bs-dismiss='modal'>Close</a>          
+            <button id = 'dialog__confirm-link' onclick='ajaxDelete()' class='btn btn-success float-end'>Confirm</button>
+            <button onclick='closeDeleteDialog()' class='btn btn-danger' data-bs-dismiss='modal'>Close</button>          
         </form>
     </dialog>
     <table>
@@ -65,7 +65,7 @@ while ($row = $query_result->fetch_assoc()) {
     $workplace = $row['workplace'];
     $is_admin = $row['admin'];
 
-    echo "<tr>								
+    echo "<tr id='row_$id'>								
             <td>$name</td>							
             <td>$last</td>	
             <td>$email</td>	
@@ -90,103 +90,6 @@ while ($row = $query_result->fetch_assoc()) {
     }	
 
     echo "</tbody>
-        </table>           
-
-    <script>
-        
-        const deleteButtons = document.querySelectorAll('.button--delete');  
-            
-        deleteButtons.forEach(b => b.addEventListener('click', e => {
-            const dialog = document.getElementById('dialog');        
-            var action = b.dataset.action;
-        
-            const item = document.getElementById('dialog__item-to-delete');
-            item.innerHTML = action.split('/').pop();
-            
-        
-            const link = document.getElementById('dialog__confirm-link');
-            action = b.dataset.action.replace('.', ''); 
-            
-            link.setAttribute('href', action); 
-            
-            dialog.showModal();
-        }));
-
-        function closeDeleteDialog() {
-            const dialog = document.getElementById('dialog');
-            dialog.close();
-        }  
-
-
-       
-                
-        const elements = document.querySelectorAll('.form-control');
-        const submitButton = document.getElementById('add_user_btn');
-        const form = document.getElementById('add_user');                                                 
-    
-        
-        elements.forEach(elem => {
-            elem.addEventListener('input', e => {
-                
-                if (elem.validity.typeMismatch) {
-                    elem.setCustomValidity('This is invalid input!');
-                    elem.reportValidity();                                                             
-                } else {
-                    elem.setCustomValidity('');
-                }
-                
-        });
-        });      
-
-
-
-        submitButton.addEventListener('click', function() {            
-            const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
-            const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);    
-
-            if (anyInputEmpty || anyInputWrong){
-                submitButton.disabled = true;
-                showError(); 
-                setInterval(checkCondition, 1000); 
-            } else {
-                submitButton.disabled = false;
-            }
-        });
-        
-        function checkCondition(){
-            const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
-            const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);
-
-            
-            if (anyInputEmpty || anyInputWrong) {
-                if (!submitButton.disabled) showError();                    
-                submitButton.disabled = true; // Disable the button                    
-              } else {
-                submitButton.disabled = false; // Enable the button
-              }                  
-        }
-
-
-        function showError(){
-            elements.forEach(elem => {
-                if (elem.validity.typeMismatch || elem.validity.valueMissing){
-                    elem.style.borderColor = 'red';
-                    elem.setCustomValidity('Tohle není správně vyplněno!');
-                    elem.reportValidity();     
-                } else {
-                    elem.setCustomValidity('');
-                }
-            });
-        }
-        const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
-        const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);
-
-        console.log(anyInputEmpty);
-        console.log(anyInputWrong);
-      
-
-    </script> 
-
-
+        </table>                   
     ";
     ?>
