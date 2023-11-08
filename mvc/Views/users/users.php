@@ -118,8 +118,7 @@ while ($row = $query_result->fetch_assoc()) {
         }  
 
 
-        function delete_user_ajax() {
-        }
+       
                 
         const elements = document.querySelectorAll('.form-control');
         const submitButton = document.getElementById('add_user_btn');
