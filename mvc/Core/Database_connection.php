@@ -124,7 +124,7 @@ class Database_connection {
 
     function new_full_user($name, $last, $password, $email, $phone, $workplace, $is_admin){
         $mysqli = $this->open();	             
-        $mysqli = $mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('?', '?', '?', '?', '?', '?', '?');"); 
+        $mysqli = $mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES (?, ?, ?, ?, ?, ?, ?);"); 
         
         $mysqli->bind_param("sssssss", $name, $last, $password, $email, $phone, $workplace, $is_admin);
         $mysqli->execute();

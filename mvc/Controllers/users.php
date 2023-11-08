@@ -63,7 +63,7 @@ else if ($router->method == 'delete') {
     $email = $_POST['email'];
     $workplace = $_POST['workplace'];
     $phone = $_POST['phone'];
-    $is_admin = $_POST['admin'];  
+    $is_admin = $_POST['admin'] ?? 'true';  
     
     $user = $db->load_user_data($email);    
     $added = false;

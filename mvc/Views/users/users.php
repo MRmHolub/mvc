@@ -5,22 +5,22 @@ echo "
     <form id='add_user' name='new_user' class='move_me half' method='POST' action='$domena/users/add'>						    
     
         <label for='name'>Name</label>
-        <input class='form-control require' type='text' id='name' name='name' placeholder='Enter your name' >        
+        <input class='form-control require' type='text' id='name' name='name' placeholder='Enter your name' required>        
 
         <label for='last'>Last</label>
-        <input class='form-control require' type='text' id='last' name='last' placeholder='Enter your last name' >                
+        <input class='form-control require' type='text' id='last' name='last' placeholder='Enter your last name' required>                
 
         <label for='email'>Email</label>
-        <input class='form-control require' type='email' id='emailos' name='email' placeholder='Enter your email'>        
+        <input class='form-control require' type='email' id='emailos' name='email' placeholder='Enter your email' required>        
 
         <label for='phone'>Phone</label>
-        <input class='form-control require' type='text' id='phone' name='phone' placeholder='Enter your phone' >        
+        <input class='form-control require' type='text' id='phone' name='phone' placeholder='Enter your phone' required>        
 
         <label for='password'>Password</label>
-        <input class='form-control require' type='password' id='password' name='password' placeholder='Enter your password' >        
+        <input class='form-control require' type='password' id='password' name='password' placeholder='Enter your password' required>        
 
         <label for='workplace'>Workplace</label>
-        <input class='form-control require' type='text' id='workplace' name='workplace' placeholder='Enter your workplace' >                
+        <input class='form-control require' type='text' id='workplace' name='workplace' placeholder='Enter your workplace' required>                
         
         <div>
             <span>Permissions</span>
@@ -91,7 +91,102 @@ while ($row = $query_result->fetch_assoc()) {
 
     echo "</tbody>
         </table>           
-   
+
+    <script>
+        
+        const deleteButtons = document.querySelectorAll('.button--delete');  
+            
+        deleteButtons.forEach(b => b.addEventListener('click', e => {
+            const dialog = document.getElementById('dialog');        
+            var action = b.dataset.action;
+        
+            const item = document.getElementById('dialog__item-to-delete');
+            item.innerHTML = action.split('/').pop();
+            
+        
+            const link = document.getElementById('dialog__confirm-link');
+            action = b.dataset.action.replace('.', ''); 
+            
+            link.setAttribute('href', action); 
+            
+            dialog.showModal();
+        }));
+
+        function closeDeleteDialog() {
+            const dialog = document.getElementById('dialog');
+            dialog.close();
+        }  
+
+
+        function delete_user_ajax() {
+        }
+                
+        const elements = document.querySelectorAll('.form-control');
+        const submitButton = document.getElementById('add_user_btn');
+        const form = document.getElementById('add_user');                                                 
+    
+        
+        elements.forEach(elem => {
+            elem.addEventListener('input', e => {
+                
+                if (elem.validity.typeMismatch) {
+                    elem.setCustomValidity('This is invalid input!');
+                    elem.reportValidity();                                                             
+                } else {
+                    elem.setCustomValidity('');
+                }
+                
+        });
+        });      
+
+
+
+        submitButton.addEventListener('click', function() {            
+            const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
+            const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);    
+
+            if (anyInputEmpty || anyInputWrong){
+                submitButton.disabled = true;
+                showError(); 
+                setInterval(checkCondition, 1000); 
+            } else {
+                submitButton.disabled = false;
+            }
+        });
+        
+        function checkCondition(){
+            const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
+            const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);
+
+            
+            if (anyInputEmpty || anyInputWrong) {
+                if (!submitButton.disabled) showError();                    
+                submitButton.disabled = true; // Disable the button                    
+              } else {
+                submitButton.disabled = false; // Enable the button
+              }                  
+        }
+
+
+        function showError(){
+            elements.forEach(elem => {
+                if (elem.validity.typeMismatch || elem.validity.valueMissing){
+                    elem.style.borderColor = 'red';
+                    elem.setCustomValidity('Tohle není správně vyplněno!');
+                    elem.reportValidity();     
+                } else {
+                    elem.setCustomValidity('');
+                }
+            });
+        }
+        const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
+        const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);
+
+        console.log(anyInputEmpty);
+        console.log(anyInputWrong);
+      
+
+    </script> 
 
 
     ";
