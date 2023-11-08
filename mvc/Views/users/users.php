@@ -93,28 +93,6 @@ while ($row = $query_result->fetch_assoc()) {
         </table>           
    
 
-<script>
-    const deleteButtons = document.querySelectorAll('.button--delete');  
 
-    deleteButtons.forEach(b => b.addEventListener('click', e => {
-        const dialog = document.getElementById('dialog');        
-        var action = b.dataset.action;
-       
-        const item = document.getElementById('dialog__item-to-delete');
-        item.innerHTML = action.split('/').pop();
-               
-        const link = document.getElementById('dialog__confirm-link');
-        action = b.dataset.action.replace('.', ''); 
-        link.setAttribute('href', action);
-        
-        dialog.showModal();
-    }));
-
-    function closeDeleteDialog() {
-        const dialog = document.getElementById('dialog');
-        dialog.close();
-    }   
-
-</script>
     ";
     ?>

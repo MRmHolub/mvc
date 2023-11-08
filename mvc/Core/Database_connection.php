@@ -122,7 +122,7 @@ class Database_connection {
         return $result;
     }
 
-    function new_full_user(){
+    function new_full_user($name, $last, $password, $email, $phone, $workplace, $is_admin){
         $mysqli = $this->open();	             
         $mysqli = $mysqli->prepare("INSERT INTO users (name, last, password, email, phone, workplace, admin) VALUES ('?', '?', '?', '?', '?', '?', '?');"); 
         
