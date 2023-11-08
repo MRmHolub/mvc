@@ -1,6 +1,6 @@
 <?php			
 echo "
-    <h1 class='move_me'>Přihlášený uživatel: $_SESSION[autorized] </h1>
+    <h1 class='move_me'>Přihlášený uživatel: $_SESSION[email] </h1>
     <h2 class='move_me'>Add new user</h2>
     <form id='add_user' name='new_user' class='move_me half' method='POST' action='$domena/users/add'>						    
     
