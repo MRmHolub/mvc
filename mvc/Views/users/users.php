@@ -90,6 +90,6 @@ while ($row = $query_result->fetch_assoc()) {
     }	
 
     echo "</tbody>
-        </table>                   
+        </table>                      
     ";
     ?>

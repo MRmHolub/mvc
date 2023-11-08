@@ -1,3 +1,5 @@
+
+console.log('jsem tu pico');
 const deleteButtons = document.querySelectorAll('.button--delete');  
             
 deleteButtons.forEach(b => b.addEventListener('click', e => {
@@ -23,15 +25,15 @@ function closeDeleteDialog() {
 
 
 function ajaxDelete(){            
-    const link = document.getElementById('dialog__confirm-link');
-    const action_arr = link.dataset.action.split('/');
+    var delete_link = document.getElementById('dialog__confirm-link');
+    var action_arr = delete_link.dataset.action.split('/');
     var user_id = action_arr[2];
     var actionUrl = 'http://localhost/mvc/api/delete/' + user_id;
 
     fetch(actionUrl).then(response => {
         if (response.ok) {                                                                
             var user_id_str = 'row_' + user_id;
-            const row = document.getElementById(user_id_str);
+            var row = document.getElementById(user_id_str);
             row.innerHTML = '';            
             console.log('deleted');
         } else {                    
