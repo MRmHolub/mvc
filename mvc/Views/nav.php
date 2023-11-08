@@ -8,6 +8,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        
       <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap.css">
       <link rel="stylesheet" href="//localhost/mvc/Views/bootstrap-icons.css">                    
       <style>
@@ -117,6 +118,8 @@
             </div>            
           </nav>
 
-          <main>          
+          <main>   
+          <script type="text/javascript" src="myfunctions.js"></script>
+          <script type="text/javascript" src="bootstrap.js"></script>       
   ';
 ?>
