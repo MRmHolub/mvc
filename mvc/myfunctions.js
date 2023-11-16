@@ -1,5 +1,3 @@
-
-console.log('jsem tu pico');
 const deleteButtons = document.querySelectorAll('.button--delete');  
             
 deleteButtons.forEach(b => b.addEventListener('click', e => {
@@ -43,7 +41,6 @@ function ajaxDelete(){
 }
         
 const elements = document.querySelectorAll('.form-control');
-const submitButton = document.getElementById('add_user_btn');
 const form = document.getElementById('add_user');                                                 
 
 
@@ -60,20 +57,21 @@ elements.forEach(elem => {
     });
 });      
 
+const submitButton = document.getElementById('add_user_btn');
+if (submitButton){
+    submitButton.addEventListener('click', function() {            
+        const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
+        const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);    
 
-
-submitButton.addEventListener('click', function() {            
-    const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
-    const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);    
-
-    if (anyInputEmpty || anyInputWrong){
-        submitButton.disabled = true;
-        showError(); 
-        setInterval(checkCondition, 1000); 
-    } else {
-        submitButton.disabled = false;
-    }
-});
+        if (anyInputEmpty || anyInputWrong){
+            submitButton.disabled = true;
+            showError(); 
+            setInterval(checkCondition, 1000); 
+        } else {
+            submitButton.disabled = false;
+        }
+    });
+}
 
 function checkCondition(){
     const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
@@ -100,9 +98,49 @@ function showError(){
         }
     });
 }
-const anyInputEmpty = [...elements].some(elem => elem.validity.valueMissing);
-const anyInputWrong = [...elements].some(elem => elem.validity.typeMisMatch);
 
-console.log(anyInputEmpty);
-console.log(anyInputWrong);
+
+
+const container = document.getElementById('api_get_container');
+var action_id = container.dataset.action;
+var actionUrl = 'http://localhost/mvc/api/get';
+const dataTable = document.getElementById('api_data_table');
+
+if (action_id != ''){
+    actionUrl = actionUrl + '/' + action_id;
+}
+console.log(actionUrl);
+
+fetch(actionUrl)
+.then(r => r.json())
+.then(data => {    
+    console.log(data);
+
+    //delete previuos
+    dataTable.querySelector('tbody').innerHTML = '';
+    
+
+    
+    data.forEach(obj => {
+      
+      const email = obj.email;
+      const last = obj.last;
+      const name = obj.name;
+      const phone = obj.phone;
+
+      const newRow = dataTable.insertRow();
+      
+      const emailCell = newRow.insertCell(0);
+      emailCell.textContent = email;
+
+      const lastCell = newRow.insertCell(1);
+      lastCell.textContent = last;
+
+      const nameCell = newRow.insertCell(2);
+      nameCell.textContent = name;
+
+      const phoneCell = newRow.insertCell(3);
+      phoneCell.textContent = phone;
+    });
+});
 

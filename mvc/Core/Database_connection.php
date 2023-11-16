@@ -39,7 +39,7 @@ class Database_connection {
     }
     
     function update_user_api($user, $name, $last){        
-        update_user($name, $last, $user['email'], $user['workplace'],$user['phone'], $user['admin'], $user['password'], $user['email']);
+        $this->update_user($name, $last, $user['email'], $user['workplace'],$user['phone'], $user['admin'], $user['password'], $user['email']);
     }
     
     function add_user($name, $last, $email){
@@ -129,7 +129,6 @@ class Database_connection {
         $mysqli->bind_param("sssssss", $name, $last, $password, $email, $phone, $workplace, $is_admin);
         $mysqli->execute();
     }
-
 }
 
 

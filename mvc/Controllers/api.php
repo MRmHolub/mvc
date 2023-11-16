@@ -2,41 +2,36 @@
     
 
     $_SESSION['user_list'] = [];
-
+    $_SESSION["query"] = null;
     $method = $router->method;
     $params_arr = $router->params ?? null;
 
 
+    
     if ($method == 'get'){          
         if ($params_arr){            
             $data[] = $db->load_user_data_id($params_arr[0]);
+            $id = $params_arr[0];
         } else {
             $data = [];
             $query_result = $db->load_users();
             while($row = $query_result->fetch_assoc()){            
                 $data[] = $row;                
             }  
+            $id = null;
         }                                        
     
         if ($data[0]) {                                   
-            $fp = fopen('data.csv', 'w');
-            
-            foreach ($data as $row) {
-                fputcsv($fp, $row);
-            }            
-            fclose($fp);
-            header("Content-Type: application/json");                
-            echo readfile('data.csv');
-    
+            $_SESSION["query"] = $id;                    
+            header("Content-Type: application/json");             
+            echo json_encode($data, JSON_PRETTY_PRINT); 
         } else {            
             header("Content-Type: application/json");  
             echo "Requested user does not exist";
         }
 
     } else {    
-
-        
-
+                
         if ($method == 'post'){                
             try {
                 if (count($params_arr) > 2){

@@ -27,9 +27,13 @@ try {
     include "Controllers/dashboard.php";          
   }    
 
-  include 'Controllers/end_of_page.php';
+  if ($controller != 'api' && $controller != 'API') {
+    echo 
+    '<script type="text/javascript" src="myfunctions.js"></script>
+    <script type="text/javascript" src="bootstrap.js"></script>';
+  }
 
-} catch (Exception $e){
+} catch (Exception $e){ 
   echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
 ?>
